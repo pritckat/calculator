@@ -40,6 +40,22 @@ function operate(o, a, b) {
     }
 }
 
+function backspace() {
+    if (!num1Lock) {
+        console.log("backspace")
+        num1 = num1.slice(0, -1)
+        console.log(`num1 is ${num1}`)
+    } else if (num2 == "") {
+        opp = ""
+        console.log("backspace")
+        console.log(`opp is ${opp}`)
+        num1Lock = false
+    } else {
+        num2 = num2.slice(0, -1)
+        console.log(`num2 is ${num2}`)
+    }
+}
+
 function assignValue(button) {
     if (numbers.includes(Number(button.value))) {
         if (!num1Lock) {
@@ -71,12 +87,14 @@ function assignValue(button) {
             num1Lock = false
             console.log(value)
         }
-    } else if (button.value = "A/C") {
+    } else if (button.value == "A/C") {
         num1 = ""
         num2 = ""
         num1Lock = false
         opp = ""
         console.log(`${num1} ${num2} ${num1Lock} ${opp}`)
+    } else if (button.value == "<<") {
+        backspace()
     }
         else {
         console.log("Something went wrong!")
