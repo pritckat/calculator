@@ -1,0 +1,15 @@
+div {
+    margin: 1em;
+}
+
+div * {
+    margin: .1em;
+}
+
+span {
+    margin: 1em;
+    width: 30%;
+    border: thin solid black;
+    height: 50px;
+    float: left;
+}
