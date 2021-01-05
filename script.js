@@ -46,13 +46,16 @@ function backspace() {
         console.log("backspace")
         num1 = num1.slice(0, -1)
         console.log(`num1 is ${num1}`)
+        display.textContent = display.textContent.slice(0, -1)
     } else if (num2 == "") {
         opp = ""
+        display.textContent = display.textContent.slice(0, -3)
         console.log("backspace")
         console.log(`opp is ${opp}`)
         num1Lock = false
     } else {
         num2 = num2.slice(0, -1)
+        display.textContent = display.textContent.slice(0, -1)
         console.log(`num2 is ${num2}`)
     }
 }
@@ -106,7 +109,6 @@ function assignValue(button) {
         display.textContent = ""
     } else if (button.value == "<<") {
         backspace()
-        display.textContent = display.textContent.slice(0, -1)
     }
         else {
         console.log("Something went wrong!")
