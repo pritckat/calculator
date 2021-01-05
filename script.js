@@ -43,23 +43,50 @@ function operate(o, a, b) {
 }
 
 function backspace() {
+    console.log(display.textContent)
     if (!num1Lock) {
+        console.log("here")
         console.log("backspace")
         num1 = num1.slice(0, -1)
         console.log(`num1 is ${num1}`)
-        display.textContent = display.textContent.slice(0, -1)
+        writeDisplay(display.textContent.slice(0, -1))
     } else if (num2 == "") {
+        console.log("or here")
         opp = ""
-        display.textContent = display.textContent.slice(0, -3)
+        temp = display.textContent.slice(0, -3)
+        clearDisplay()
+        writeDisplay(temp)
         console.log("backspace")
         console.log(`opp is ${opp}`)
         num1Lock = false
     } else {
+        console.log("ore her")
         num2 = num2.slice(0, -1)
-        display.textContent = display.textContent.slice(0, -1)
+        writeDisplay(display.textContent.slice(0, -1))
         console.log(`num2 is ${num2}`)
     }
 }
+
+function equals() {
+    console.log("equals")
+    if ((opp == "/" && num2 == 0 || num2 == "")) {
+        console.log("no")
+    } else {
+        let value = operate(opp, Number(num1), Number(num2))
+        num1 = value.toString()
+        console.log(`num1 is ${num1}`)
+        num2 = ""
+        opp = ""
+        num1Lock = false
+        console.log(value)
+        writeDisplay(` = ${value}`)
+        writePrevious(`${display.textContent}`)
+        clearDisplay()
+        writeDisplay(num1)
+        document.getElementById("<<").disabled = true
+    }
+}
+
 
 function writeDisplay(thing) {
     display.textContent += thing
@@ -75,6 +102,16 @@ function writePrevious(thing) {
 
 function clearPrevious() {
     previous.textContent = ""
+}
+
+function allClear() {
+    console.log("clear")
+    num1 = ""
+    num2 = ""
+    num1Lock = false
+    opp = ""
+    clearDisplay()
+    clearPrevious()
 }
 
 function assignValue(button) {
@@ -101,38 +138,30 @@ function assignValue(button) {
             } else {
                 writeDisplay(` ${opp} `)
             }
+        } else {
+            equals()
+            document.getElementById("<<").disabled = false
+            opp = button.value
+            num1Lock = true
+            console.log(`operator is ${opp}`)
+            console.log(num1Lock)
+            if (num1 == "") {
+                writeDisplay(`0 ${opp} `)
+            } else {
+                writeDisplay(` ${opp} `)
+            }
         }
 
     } else if (button.value == "=") {
-        console.log("equals")
-        if ((opp == "/" && num2 == 0 || num2 == "")) {
-            console.log("no")
-        } else {
-            let value = operate(opp, Number(num1), Number(num2))
-            num1 = value.toString()
-            console.log(`num1 is ${num1}`)
-            num2 = ""
-            opp = ""
-            num1Lock = false
-            console.log(value)
-            writeDisplay(` = ${value}`)
-            writePrevious(`${display.textContent}`)
-            clearDisplay()
-            writeDisplay(num1)
-            document.getElementById("<<").disabled = true
-        }
+        equals()
+
     } else if (button.value == "A/C") {
-        num1 = ""
-        num2 = ""
-        num1Lock = false
-        opp = ""
-        console.log(`${num1} ${num2} ${num1Lock} ${opp}`)
-        clearDisplay()
-        clearPrevious()
+        allClear()
+
     } else if (button.value == "<<") {
         backspace()
-    }
-        else {
+
+    } else {
         console.log("Something went wrong!")
     }
 
