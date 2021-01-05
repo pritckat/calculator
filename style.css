@@ -1,13 +1,17 @@
+* {
+    box-sizing: border-box;
+}
+
 div {
-    margin: 1em;
+    margin: 1rem;
 }
 
 div * {
-    margin: .1em;
+    margin: .1rem;
 }
 
 span {
-    margin: 1em;
+    margin: 1rem;
     width: 30%;
     border: thin solid black;
     height: 30px;
@@ -16,13 +20,20 @@ span {
     margin-top: 0;
     margin-bottom: 0;
     text-align: right;
-    padding: .5em;
-}
-
-#display {
-    border-bottom: 1px dashed lightgrey;
+    padding: .5rem;
 }
 
 #previous {
+    border-bottom: 1px dashed lightgrey;
+    font-size: .75rem;
+    color: grey;
+}
+
+#display {
     border-top: none;
+}
+
+#display:empty::before {
+    content: '0';
+    display: inline-block;
 }

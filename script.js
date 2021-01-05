@@ -5,6 +5,7 @@ const operatorDiv = document.getElementById("operators")
 const numberDiv = document.getElementById("numbers")
 const otherButtonsDiv = document.getElementById("otherButtons")
 const display = document.getElementById("display")
+const previous = document.getElementById("previous")
 
 let num1 = ""
 let num1Lock = false
@@ -60,20 +61,33 @@ function backspace() {
     }
 }
 
-function write(thing) {
+function writeDisplay(thing) {
     display.textContent += thing
 }
 
+function clearDisplay() {
+    display.textContent = ""
+}
+
+function writePrevious(thing) {
+    previous.textContent = thing
+}
+
+function clearPrevious() {
+    previous.textContent = ""
+}
+
 function assignValue(button) {
+    document.getElementById("<<").disabled = false
     if (numbers.includes(Number(button.value))) {
         if (!num1Lock) {
             num1 = num1.concat(button.value)
             console.log(`num1 is ${num1}`)
-            write(button.value)
+            writeDisplay(button.value)
         } else {
             num2 = num2.concat(button.value)
             console.log(`num2 is ${num2}`)
-            write(button.value)
+            writeDisplay(button.value)
         }
     } else if (operators.includes(button.value)){
         console.log(opp)
@@ -82,7 +96,11 @@ function assignValue(button) {
             num1Lock = true
             console.log(`operator is ${opp}`)
             console.log(num1Lock)
-            write(` ${opp} `)
+            if (num1 == "") {
+                writeDisplay(`0 ${opp} `)
+            } else {
+                writeDisplay(` ${opp} `)
+            }
         }
 
     } else if (button.value == "=") {
@@ -97,8 +115,11 @@ function assignValue(button) {
             opp = ""
             num1Lock = false
             console.log(value)
-            write(` = ${value}`)
-            document.getElementById("<<").toggleAttribute("disable")
+            writeDisplay(` = ${value}`)
+            writePrevious(`${display.textContent}`)
+            clearDisplay()
+            writeDisplay(num1)
+            document.getElementById("<<").disabled = true
         }
     } else if (button.value == "A/C") {
         num1 = ""
@@ -106,7 +127,8 @@ function assignValue(button) {
         num1Lock = false
         opp = ""
         console.log(`${num1} ${num2} ${num1Lock} ${opp}`)
-        display.textContent = ""
+        clearDisplay()
+        clearPrevious()
     } else if (button.value == "<<") {
         backspace()
     }
