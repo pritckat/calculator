@@ -11,14 +11,12 @@ div * {
 }
 
 span {
-    margin: 1rem;
+    margin: 0, 1rem;
     width: 30%;
     border: thin solid black;
     height: 30px;
     float: left;
     clear: both;
-    margin-top: 0;
-    margin-bottom: 0;
     text-align: right;
     padding: .5rem;
 }
