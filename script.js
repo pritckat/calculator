@@ -1,6 +1,7 @@
 const operators = ["+", "-", "*", "/"]
 const otherButtons = ["=", "<<", "A/C"]
 const numbers = Array.from(new Array(10).keys())
+numbers.push(".")
 const operatorDiv = document.getElementById("operators")
 const numberDiv = document.getElementById("numbers")
 const otherButtonsDiv = document.getElementById("otherButtons")
@@ -43,9 +44,12 @@ function operate(o, a, b) {
 }
 
 function backspace() {
+    console.log("backspace")
     if (!num1Lock) {
         num1 = num1.slice(0, -1)
-        writeDisplay(display.textContent.slice(0, -1))
+        let temp = display.textContent.slice(0, -1)
+        clearDisplay()
+        writeDisplay(temp)
     } else if (num2 == "") {
         opp = ""
         temp = display.textContent.slice(0, -3)
@@ -54,8 +58,9 @@ function backspace() {
         num1Lock = false
     } else {
         num2 = num2.slice(0, -1)
-        writeDisplay(display.textContent.slice(0, -1))
-    }
+        let temp = display.textContent.slice(0, -1)
+        clearDisplay()
+        writeDisplay(temp)    }
 }
 
 function equals() {
@@ -75,7 +80,6 @@ function equals() {
         document.getElementById("<<").disabled = true
     }
 }
-
 
 function writeDisplay(thing) {
     display.textContent += thing
@@ -104,11 +108,14 @@ function allClear() {
 
 function assignValue(button) {
     document.getElementById("<<").disabled = false
-    if (numbers.includes(Number(button.value))) {
+    if (numbers.includes(Number(button.value)) || button.value == ".") {
         if (!num1Lock) {
+            if (button.value === '.' && num1.includes('.')) { return }
             num1 = num1.concat(button.value)
             writeDisplay(button.value)
+            console.log(`num1 is ${num1}`)
         } else {
+            if (button.value === '.' && num2.includes('.')) { return }
             num2 = num2.concat(button.value)
             writeDisplay(button.value)
         }
