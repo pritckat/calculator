@@ -44,7 +44,6 @@ function operate(o, a, b) {
 }
 
 function backspace() {
-    console.log("backspace")
     if (!num1Lock) {
         num1 = num1.slice(0, -1)
         let temp = display.textContent.slice(0, -1)
@@ -113,7 +112,6 @@ function assignValue(button) {
             if (button.value === '.' && num1.includes('.')) { return }
             num1 = num1.concat(button.value)
             writeDisplay(button.value)
-            console.log(`num1 is ${num1}`)
         } else {
             if (button.value === '.' && num2.includes('.')) { return }
             num2 = num2.concat(button.value)
