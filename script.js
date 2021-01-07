@@ -67,7 +67,7 @@ function equals() {
         allClear()
         writePrevious("N/A")
     } else {
-        let value = operate(opp, Number(num1), Number(num2))
+        let value = operate(opp, Number(num1), Number(num2)).toFixed(2)
         num1 = value.toString()
         num2 = ""
         opp = ""
