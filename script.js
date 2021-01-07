@@ -1,7 +1,10 @@
 const operators = ["+", "-", "*", "/"]
 const otherButtons = ["=", "<<", "A/C"]
 const numbers = Array.from(new Array(10).keys())
+numbers.shift()
+numbers.push(0)
 numbers.push(".")
+
 const operatorDiv = document.getElementById("operators")
 const numberDiv = document.getElementById("numbers")
 const otherButtonsDiv = document.getElementById("otherButtons")
