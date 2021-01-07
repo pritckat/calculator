@@ -71,6 +71,12 @@ button {
     border: thin solid #ff0a8d;
     background: #c3ff1f;
 }
+
+button:disabled {
+    background: #d6ffb7;
+    border: #ffc09f;
+    color: lightgrey;
+}
 #calculator {
     display: flex;
     width: 50%;
